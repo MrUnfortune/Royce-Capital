@@ -362,21 +362,27 @@ document.addEventListener('DOMContentLoaded', updateDimensions);
         .join('');
     })();
 
-    // Отправляем напрямую (без iframe)
     try {
+      // Отправляем POST-запрос напрямую (без iframe)
       const response = await fetch(form.action, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
         body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(hashedPassword)}`
       });
 
+      // Читаем ответ как текст (не как JSON — может быть HTML-ошибка)
       const text = await response.text();
+      console.log("Ответ от GAS:", text);
+
       let data;
       try {
         data = JSON.parse(text);
       } catch (e) {
+        // Если не JSON — возможно, это ошибка GAS в виде HTML
+        alert("Сервер вернул некорректный ответ. Проверьте консоль разработчика (F12 → Console).");
         console.error("Не JSON:", text);
-        alert("Сервер вернул некорректный ответ.");
         return;
       }
 
@@ -389,8 +395,8 @@ document.addEventListener('DOMContentLoaded', updateDimensions);
         alert(data.error || 'Неверный логин или пароль');
       }
     } catch (err) {
-      console.error(err);
-      alert('Ошибка сети. Проверьте подключение.');
+      console.error('Ошибка сети:', err);
+      alert('Не удалось подключиться к серверу. Проверьте интернет и URL скрипта.');
     }
   });
 });
