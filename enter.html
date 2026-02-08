@@ -277,7 +277,7 @@
             <img src ="Visual%20block,%20logo.png" alt="Logo" class="logo-img">
             <div class="form-container">
                 <h2>Welcome back</h2>
-                <form action="https://script.google.com/macros/s/AKfycbyb0tlkipU_Wv9AieokWIkGlubMGDeJfVhBcDMbkoHv3YYxBBO0IU0ZMNS84Dv0Sufu/exec">
+                <form action="https://script.google.com/macros/s/AKfycbzYEuDWwJZEzA7daAOfR0QPJlm9zZ3e_jK_O5qDycmnHDqlpHyLKw-89Q4Phy_PzUM/exec">
                 <div class="input-group">
                     <svg class="email-password-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="35" height="35" fill="url(#pattern0_3_63)"/>
@@ -370,7 +370,63 @@ document.addEventListener('DOMContentLoaded', async function() {
         iframe.name = 'hiddenFrame';
         iframe.style.display = 'none';
         document.body.appendChild(iframe);
-        
+
+        // Функция для обработки ответа
+        const handleResponse = () => {
+            try {
+                const responseDoc = iframe.contentDocument || iframe.contentWindow.document;
+                // Проверяем, существует ли документ и его тело
+                if (!responseDoc || !responseDoc.body) {
+                    throw new Error("Документ iframe не содержит тела.");
+                }
+                const responseText = responseDoc.body.textContent || responseDoc.body.innerText;
+                console.log("Полученный ответ:", responseText); // Отладочное сообщение
+
+                if (!responseText) {
+                     throw new Error("Ответ от сервера пустой.");
+                }
+
+                const data = JSON.parse(responseText.trim());
+
+                if (data.success) {
+                    // --- Сохраняем ВСЕ полученные данные ---
+                    localStorage.setItem('authToken', data.token);
+                    localStorage.setItem('userId', data.userId);
+                    localStorage.setItem('userEmail', email);
+                    // --- Добавлено сохранение fullname и money ---
+                    localStorage.setItem('userFullname', data.fullname); // <-- Добавлено
+                    localStorage.setItem('userMoney', data.money);       // <-- Добавлено
+                    
+                    // Перенаправляем
+                    window.location.href = 'account.html';
+                } else {
+                    alert(data.message || 'Неверный логин или пароль');
+                }
+            } catch (error) {
+                console.error('Ошибка при обработке ответа:', error);
+                // Проверим, есть ли текст ошибки в body
+                try {
+                    const responseDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    if (responseDoc && responseDoc.body) {
+                        const bodyText = responseDoc.body.textContent || responseDoc.body.innerText;
+                        if (bodyText.includes("Exception") || bodyText.includes("Error")) {
+                             console.error("Возможно, ошибка выполнения скрипта:", bodyText);
+                             alert('Произошла ошибка на сервере. Проверьте консоль разработчика.');
+                        }
+                    }
+                } catch (innerErr) {
+                    // Игнорируем ошибку при чтении body, если не удалось
+                }
+                alert('Ошибка авторизации или соединения. Попробуйте позже.');
+            }
+            
+            // Очищаем iframe после обработки
+            document.body.removeChild(iframe);
+        };
+
+        // Назначаем обработчик события load
+        iframe.addEventListener('load', handleResponse);
+
         // Создаём временную форму
         const tempForm = document.createElement('form');
         tempForm.method = 'POST';
@@ -396,36 +452,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Отправляем форму
         tempForm.submit();
         
-        // Ждём ответ (~1.5 секунды)
-        setTimeout(async function() {
-            try {
-                const responseDoc = iframe.contentDocument || iframe.contentWindow.document;
-                const responseText = responseDoc.body.textContent || responseDoc.body.innerText;
-                const data = JSON.parse(responseText.trim());
-                
-                if (data.success) {
-                    // --- Сохраняем ВСЕ полученные данные ---
-                    localStorage.setItem('authToken', data.token);
-                    localStorage.setItem('userId', data.userId);
-                    localStorage.setItem('userEmail', email);
-                    // --- Добавлено сохранение fullname и money ---
-                    localStorage.setItem('userFullname', data.fullname); // <-- Добавлено
-                    localStorage.setItem('userMoney', data.money);       // <-- Добавлено
-                    
-                    // Перенаправляем
-                    window.location.href = 'account.html';
-                } else {
-                    alert(data.message || 'Неверный логин или пароль');
-                }
-            } catch (error) {
-                console.error('Ошибка:', error);
-                alert('Ошибка авторизации. Попробуйте позже.');
-            }
-            
-            // Очищаем
-            document.body.removeChild(tempForm);
-            document.body.removeChild(iframe);
-        }, 1500);
+        // Очищаем форму после отправки
+        document.body.removeChild(tempForm);
     });
 });
     </script>
