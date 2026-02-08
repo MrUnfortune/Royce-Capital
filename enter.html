@@ -335,80 +335,77 @@
 
     <script>
       function updateDimensions() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    document.getElementById('width').textContent = width;
-    document.getElementById('height').textContent = height;
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  document.getElementById('width').textContent = width;
+  document.getElementById('height').textContent = height;
 }
 
 window.addEventListener('resize', updateDimensions);
 document.addEventListener('DOMContentLoaded', updateDimensions);
 
 async function hashPassword(password) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    return Array.from(new Uint8Array(hashBuffer))
-        .map(b => b.toString(16).padStart(2, '0'))
-        .join('');
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hashBuffer))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
-    const form = document.querySelector('form');
+  const form = document.querySelector('form');
 
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-        // Хэшируем пароль
-        const hashedPassword = await hashPassword(password);
+    try {
+      // Хэшируем пароль
+      const hashedPassword = await hashPassword(password);
 
-        try {
-            const response = await fetch(form.action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(hashedPassword)}`
-            });
+      // Отправляем напрямую через fetch (без iframe!)
+      const response = await fetch(form.action, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(hashedPassword)}`
+      });
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
 
-            const text = await response.text();
-            console.log("Raw response text:", text); // Для отладки
+      const text = await response.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        console.error("❌ Не JSON:", text);
+        alert("Сервер вернул некорректный ответ. Проверьте консоль (F12).");
+        return;
+      }
 
-            let data;
-            try {
-                data = JSON.parse(text);
-            } catch (e) {
-                 console.error("Failed to parse JSON. Raw text:", text);
-                 alert("Сервер вернул некорректный ответ. Проверьте консоль (F12).");
-                 return;
-            }
+      if (data.success) {
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('userId', data.userId);
+        localStorage.setItem('userEmail', email);
+        // Сохраняем fullname и money (если они есть в ответе)
+        if (data.fullname) localStorage.setItem('userFullname', data.fullname);
+        if (data.money) localStorage.setItem('userMoney', data.money);
 
-            if (data.success) {
-                // Сохраняем полученные данные в localStorage
-                localStorage.setItem('authToken', data.token);
-                localStorage.setItem('userId', data.userId);
-                localStorage.setItem('userEmail', email);
-                // --- Сохраняем fullname и money ---
-                localStorage.setItem('userFullname', data.fullname); // <-- Добавлено
-                localStorage.setItem('userMoney', data.money);       // <-- Добавлено
-
-                // Перенаправляем на account.html
-                window.location.href = 'account.html';
-            } else {
-                alert(data.error || 'Неверный логин или пароль');
-            }
-        } catch (error) {
-            console.error('Network or other error:', error);
-            alert('Ошибка соединения или авторизации. Проверьте консоль (F12).');
-        }
-    });
+        window.location.href = 'account.html';
+      } else {
+        alert(data.error || 'Неверный логин или пароль');
+      }
+    } catch (err) {
+      console.error("🔥 Ошибка:", err);
+      alert('Не удалось подключиться к серверу.\n\nПроверьте:\n1. Скрипт развернут как "Anyone with the link"\n2. В таблице пароль — хэш SHA-256 (если вы хэшируете)\n3. Email в таблице — точный, без пробелов');
+    }
+  });
 });
     </script>
 </body>
