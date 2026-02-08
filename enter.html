@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royce Capital</title>
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Albert Sans,  Albert Sans;
+            background-color: #0C0C0C;
+            color: #C6C6C6;
+            min-height: : 100vh;
+            font-weight: 700;
+        }
+
+        .container {
+            display: grid;
+            grid-template-rows: 80px auto 1fr auto 50px;
+            grid-template-columns: 0fr 1fr 0fr;
+            height: 100vh;
+            grid-template-areas:
+                "header        header        header"
+                "left-aside    banner        right-aside"
+                "left-aside    main          right-aside"
+                "left-aside    low-content   right-aside"
+                "footer        footer        footer";
+            grid-gap: 10px;  padding: 10px;
+            font-weight: 600;  font-size: 20px;
+        }
+
+        .header {
+            grid-area: header;
+            background-color: #0C0C0C;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .left-aside {
+            grid-area: left-aside;
+            background-color: #0C0C0C;
+            padding: 20px;
+        }
+
+        .main {
+            grid-area: main;
+            background-color: #0C0C0C;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            gap: 30px;
+            position: relative
+        }
+
+        .banner {
+            grid-area: banner;
+            background-color: #0C0C0C;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .right-aside {
+            grid-area: right-aside;
+            background-color: #0C0C0C;
+            padding: 10px;
+        }
+
+        .low-content {
+            grid-area: low-content;
+            background-color: #0C0C0C;
+            padding: 20px;
+        }
+
+        .footer {
+            grid-area: footer;
+            background-color: #0C0C0C;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .logo-img{
+            width: 60%;
+            max-width: 450px;
+            height: auto;
+            object-fit: contain;
+            align-self: center;
+        }
+        
+        .form-container {
+            width: 60%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .mobile-logo {
+            display: none;  
+        }
+        
+        h2 {
+            font-size: 40px;
+            margin-bottom: 25px;
+            color: #c6c6c6;
+        }
+        
+        .input-group {
+            display: flex;
+            align-items: center;
+            background-color: #282828;
+            border-radius: 12px;
+            padding: 10px 10px;
+            gap: 10px;
+        }
+        
+        .input-group input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #c6c6c6;
+            font-family: inherit;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .input-group svg {
+            fill: #c6c6c6;
+            width: 20px;
+            height: 20px;
+        }
+        
+        .btn {
+            padding: 7px 12px;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            text-decoration: none;
+        }
+        
+        .btn-signin {
+            background-color: #c6c6c6;
+            color: #0c0c0c;
+            font-size: 20px;
+            padding: 8px 95px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .btn-signin span {
+            margin-right: 0px;        
+        }
+        
+        .btn-signin .icon-right {
+            position: absolute;       
+            right: 16px;              
+            width: 30px;
+            height: 38px;
+            fill: currentColor;
+            transform: scale(0.8);
+        }
+        
+        .btn-signin:hover {
+            background-color: #c6c6c6;
+        }
+        
+        .btn-create {
+            background-color: #282828;
+            color: #c6c6c6;
+            width: fit-content;
+            font-size: 18px;
+            padding: 8px 16px;
+        }
+        
+        .btn-create:hover {
+            background-color: #282828;
+        }
+        
+        .btn svg {
+            width: 25px;
+            height: 20px;
+            
+        }
+        
+        .email-password-icon{
+            width: 30px !important; /* Увеличиваем ширину */
+            height: 30px !important; /* Увеличиваем высоту */
+            fill: #c6c6c6; /* Цвет (если нужно) */
+        }
+        
+        #dimensions{
+            font-size: 16px;
+            opacity: 0.7;
+        }
+
+
+        @media (max-width: 678px) {
+        .container {
+          grid-template-rows: 50px 50px 50px 1fr 50px 50px 50px;
+          grid-template-columns: 1fr;
+          grid-template-areas:
+            "header"
+            "banner"
+            "left-aside"
+            "main"
+            "right-aside"
+            "low-content"
+            "footer";
+          }
+            
+            .logo-img{
+                width: 0%;
+                max-width: 75px;
+            }
+            
+            .main {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .mobile-logo {
+                display: block;  
+                width: 50%; 
+                max-width: 250px;
+                height: auto;
+                margin: 0 auto; 
+            }
+            
+            .banner {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-top: 35px;
+            }
+            
+            .form-container {
+                width: 90%;
+                max-width: 250px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+        </header>
+        <aside class="left-aside"></aside>
+        <main class="main">
+            <img src ="Visual%20block,%20logo.png" alt="Logo" class="logo-img">
+            <div class="form-container">
+                <h2>Welcome back</h2>
+                <div class="input-group">
+                    <svg class="email-password-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect width="35" height="35" fill="url(#pattern0_3_63)"/>
+                        <defs>
+                            <pattern id="pattern0_3_63" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_3_63" transform="scale(0.0104167)"/>
+                            </pattern>
+                            <image id="image0_3_63" width="96" height="96" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAADu0lEQVR4nO2cXYgNYRjHf9hWvmKzCJuirJKvshfy2XIjJXshH7lRLiTC2i23LvdiI59FrmRxZ28UK59L+UhSolwoaRcRNrE+ltFb76kT5rxzjnPmfWbm+dVzc86Zmf//+c85M/POOwcURVEURVEURVEURVEURVEURVEURVEURRHPOKAVuA70AgNAkJIasJ6uAS1ALYIYZBvfJ6BRQUxlvO6x3r1SBZwT0JDAU521PfDGEQFNCDzXQV/NXybAfCCklvsI4JYA44GQuhl38ycDvyKKewXMInnMAF5G9Gh6URenuI1F7iFvgHkkh7lWczEe18cpsLWEr+kHYCHyaQDeleDPXB/Exr4QEc8dIj8Bjcil0Wos5CHMo+mJ9wDM6zscx4evQBPyWAV8cfzOtzq8x4ZLxFbgZwEz34F1yGGN3TEKNX+n/WwiAsgdqH84xle24J9NEXRuzvt8YgIwrAb6HXvWbvyxzfFN/Qas/WOZRAUQ9cDWRvzsdWj6DKz8x3KJC8CwJMJoaZug5psdZkXIsokMwDAfeOswfgwYXEHdZvj4gEPDe2BBgXUkNgDDTKDH0YDTFRriHQKcdGz7tb0KJq0BGKZGuGDrBIaWUa8J9JRjmy+A+gjrSnwAhinAM0dDLgDDyqDVBHnesS2zQ0yLuL5UBGCYADxyNMbcXx71HzpHAF2ObTyxo7tkLQBDDXDH0aD7wFiKZwxw27HuByXcYE9VAIaRwBVHox4DE4nOeOChY53dwGiKJ3UBRP2peApMx029/WyhdXXZbZZCKgPIHSw7HY37CDQDw/mb4XaqSF+Fz7BSG0DudLHD0cDcMMFF4KitS/Y113IdZbjGSHUAuavVQxGaWWydKNNVduoDyIXQXsbmt5dxFlsmAsgfq4/y0xJW/RW455CpAAxzgMslNN+c6cym/GQugPwh7TOOGQvv7IF2MZUjswHkj2o22Bv722012dfMe5Um8wH4RoR3ESI8IcK7CBGeEOFdhAhPiPAuQoQnRHgXIcITIryLEOEJEd5FiPCECO8iRHhChHcRIjwhwrsIEZ4Q4V2ECE+I8C5ChCdEeG8JEXGc9HMixLuZLBAbG0JE9NrJVmmlxnr0/phqXYEH8e4Ci4Bq0kO19XQvxLPpxaS4RXWHiMli3cADSwUYD4SUt2efDwswH3iu/Xikyt4oDzJaHb7/sAk74anZztsMMlIfgF0S/rIsn1o7OfaqfQ4sbX/a12On0TeX+LyCoiiKoiiKoiiKoiiKoiiKoiiKoiiKoijEyG+f05JiJFHhRQAAAABJRU5ErkJggg=="/>
+                        </defs>
+                    </svg>
+                    <input id="email" type="email" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <svg class="email-password-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect width="35" height="35" fill="url(#pattern0_3_62)"/>
+                        <defs>
+                            <pattern id="pattern0_3_62" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_3_62" transform="scale(0.0104167)"/>
+                            </pattern>
+                            <image id="image0_3_62" width="96" height="96" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEKUlEQVR4nO2cz28WRRjHP2gxJC1KIvVaFZHE4EEgEJIq/AtarBD8cUJ+FI6m0ZRkUrCpqfEoXLgR77YlBnpQ9OKvg16MUaNEKbdaBRr1tGaSeZPmzTuz+3b3fXee2eeTPEnzdt6Z7/fZ3ZnZfWcWFEVRFEVRFEVRFEVRFEVROjAAPAuMAWeBSRdn3We7XRmlQoaA14EF4C6Q5cTfwDzwGjBYt3jJPAbMuoTmJT10MGaA4brNSGITMAGslkh8e/wJnHJ1KwGGgU8qTHx7XAO2120yVp4Afuph8lvxK7CzbrOxsQO4UzCB/wA3gavABy7s35+7/xWpw7b1ZN2mY+p2fimQtHk31RzMmTEdcTOmvPp+Bh6l4TxQoM//ChjdQN3PA1/n1L3Y9IH5TE6CLgGbS9Rvv3s5p42TNHievxpIzFsVtjUZaGelqTOj2UBSrvSgvdCVcJGGMRS4w/2yZLfjw9b5jafNv5r22OKNwNk42sN2Xwi0+yoNYiEw1ew1i562P6YhDAS6n5f60P7LgW7oQRrA7sAd7mAf2t8auGN+hgYw5jF/s48avvBoeJEGcM5j/mofNXzk0WAfgyfPOx7zc33U8L5Hw9s0AOMxbxqmoTZiMG8i0FAbMZg3EWiojRjMmwg01EYM5k0EGmojBvMmAg21EYN5E4GG2vCZX1q31LDXsdTEA/AI8F7FC66yimPV/VBktSbFAeB2BAnOCobVup+Ekr8WQVKzLuN+CgfBXsrLESQz22AsS++O5iJIYlYy7Lglki05A+51d4Bma445pyW0stp6EcfhgKnjxMfxgF77Y744JgJnfqzc8Gi2K/jEcd5jxu5YiZUZj2brRRwSb/eNQM1JmTECNSdlxgjUnJQZI1BzUmaMQM1JmTECNSdlxgjUXKmZh4GDwK6Ci3z3uijyfohdru6tFWuOlm7NTLQ9tv4MGAk85ri1ruwt91knHnfrTtc/ZvYtQWzsATjmKfsd8FCHDd33OpS1iX2qraz97veeusdLao6ebsz86Clr45Uu9np9WPDA2vihpObo6cbMf4FEtS+YDT06vl5wIbCNf0tqbswVMF7iCjiqV0AxM0e7HAPuFhwD7M7Ib3UMKGbmjEtiq9yngVnQIeC3tjeg2M86MeLqapW1A/jpijRHzUbMDLm5epHXydgNdXuA5wpurnva1T1UseZokWjGCNSclBkjUHNSZoxAzUmZMQI1J2XGCNSclBkjUHNSZoxAzV6mEloXNIVA3vSYsavPpK2MO4FAdG1ozWx2K4t9pm4A033cF+aL6cCZ33qpn9hX4vv6VElxAcFsE7Y3LGuL391CAdHsE7pHbM09bU0CexD+EHbm7yEx7Ga3d92glkUaK+4lruK7nRAD7terE+4Os+49YsZpOSR5tqMoiqIoiqIoiqIoiqIoCmH+B5CQnlTwIzoAAAAAAElFTkSuQmCC"/>
+                        </defs>
+                    </svg>
+                    <input id="password" type="password" placeholder="Password" required>
+                </div>
+                <a class="btn btn-signin">
+                    <span>Sign in</span>
+                    <svg class="icon-right">
+                        <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <mask id="mask0_3_64" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="38" height="38">
+                                <rect width="38" height="38" fill="url(#pattern0_3_64)"/>
+                            </mask>
+                            <g mask="url(#mask0_3_64)">
+                                <rect x="-4.75" width="39.1875" height="38" fill="#252525"/>
+                            </g>
+                            <defs>
+                                <pattern id="pattern0_3_64" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                    <use xlink:href="#image0_3_64" transform="scale(0.0104167)"/>
+                                </pattern>
+                                <image id="image0_3_64" width="96" height="96" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAC8UlEQVR4nO2dyWoUURSGP1FDlooDjuhTCM5ozCbuVFDXakRcSFTwFbITl8ne4SWcdWHeQPcOq2gcghMeKSihkVRVKunue8+p/4Ozq6b///zVt7rr3roNQgghhBBCCCGEEEKI8OwGzgNTwK1ENVVq2EWHOA68AP4AlkkVWp4DxwjMWmA6g2ZbQ80A6wnGGuBBBs21Zda9UnMYbmbQVGtZxfUhBFuAhQwaai3rM7CV4Gf/u3LMnU5UM6WGKn3XCcCTCnOvgA2pxQEbgbkKjY8IQNUZdoB8OFih8S0B+F1hboR8GKnQWGh3T9X4mhtedIY1Zk50hjVmTnSGNWZOdIY1Zk50hjVmTnSGNWZOdIY1Zk50hjVmTnSGNWZOdIY1Zk50DsXYXuAqcBHYlLFOF7Q1NgZ86TnuA7A/Q51uaGvszRLHLgzh9rUCAEYbpggPZaLTFW2Nva55TTE0Hc5EpxvaGjsB/GoI4UgGOt1QNSFexxngZ01TvgJH6S9hA1gppxpC+FZ+Y+oXCmAJTgLfG0Iohqx+oAAqmGgIYbFPISiAVYYwTocD2Ae8BH7UGBl0La4yBLcBbAfmEzbeemq+1NOpAC5n0HjrqcmuBTCZQdOtpy51LYDchqBtXQvg30W4eO5LF+GgTAzht4ACSPxrWAGssPn9uh+kAP7j9DJuxhXPHPeLsAFUPaVeh25HJzQ2rgmZ/Cblraf5mpIcoLHRmuM1KZ9wUn5By1KGZ2xMC7PSG9sDXAEuaGlid4yZE51hjZkTnWGNmROdYY2ZE51hjZkTnWGNmROdYY2ZE51hjZkTnWGNmROdYY2ZE51hjZkTna3RlmWJ0aZ9iXlcYW6u3DIy520rHxKAGzXj63tgNuH29bOlhtDbF28GPtWYtEzr4xDnIpJ+CizTukYgiq3g72fQVFtm3Y22fX3BOuBOBs21hrpdag1LsaLtWYZ/YfJ0gGuOsmQncK78ppFq+/rivc8CO1I3QwghhBBCCCGEEEIIwWD5C1AyuSN4e9uvAAAAAElFTkSuQmCC"/>
+                            </defs>
+                        </svg>
+                    </svg>
+                </a>
+                <a href="register.html" class="btn btn-create">Create account</a>
+            </div>
+        </main>
+        <section class="banner">
+            <img src="logo.png" alt="Mobile Logo" class="mobile-logo">
+        </section>
+        <aside class="right-aside"></aside>
+        <section class="low-content"></section>
+        <footer class="footer"></footer>
+    </div>
+
+    <script>
+        function updateDimensions() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            document.getElementById('width').textContent = width;
+            document.getElementById('height').textContent = height;
+        }
+
+        window.addEventListener('resize', updateDimensions); 
+        document.addEventListener('DOMContentLoaded', updateDimensions);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+        const signInBtn = document.querySelector('.btn-signin');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+
+        signInBtn.addEventListener('click', async function(e) {
+            e.preventDefault(); // Отменяем стандартное поведение ссылки
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!email || !password) {
+                alert("Please fill in both email and password.");
+                return;
+            }
+
+            try {
+                // Замени URL на свой из Google Apps Script
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzSJEptzlwFIXHUDf5umHnAkCZKeed0gB_no5RYb0o9mlJ0BHNidmazIq_-dz1Rylp4/exec', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    const token = result.token;
+                    window.location.href = `account.html?token=${token}`;
+                } else {
+                    alert(result.message || "Login failed. Please check your credentials.");
+                }
+
+            } catch (error) {
+                console.error("Error during login:", error);
+                alert("An error occurred. Please try again later.");
+            }
+        });
+    });
+    </script>
+</body>
+
+</html>
