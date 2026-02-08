@@ -171,7 +171,7 @@
 
   if (token) {
     // Сохраняем токен и получаем данные через doGet
-    fetch(`https://script.google.com/macros/s/AKfycbyR-M8vdFothuEkeo8ciCdYIb9A_5nIuHizJVpXzRMJ7OmkhcswbuRPvoIrwMpa8RQu/exec?token=${encodeURIComponent(token)}`)
+    fetch(`https://script.google.com/macros/s/AKfycbzlRtsuJzZ4gddku2QTyc5izeAr6zkzIDR79tOAYk0ewEfSXOtRJls8YhDEHaSnk-NJ/exec?token=${encodeURIComponent(token)}`)
       .then(res => res.json())
       .then(data => {
         if (data.valid) {
