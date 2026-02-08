@@ -277,7 +277,7 @@
             <img src ="Visual%20block,%20logo.png" alt="Logo" class="logo-img">
             <div class="form-container">
                 <h2>Welcome back</h2>
-                <form method="POST" action="https://script.google.com/macros/s/AKfycbz3ZSXf2DxWsGeXG1OUZNnCOjVZieOay1zXU2CaAxgGVbVCbynjtxh9tdpFIjKNmL-1/exec">
+                <form method="POST" action="https://script.google.com/macros/s/AKfycby31WtHhXivSUxpFDct7EBPN5vm4SusPgqsqGNrrL-IRsgyh-ruxMmMe6zbVmm71ANJ/exec">
                 <div class="input-group">
                     <svg class="email-password-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="35" height="35" fill="url(#pattern0_3_63)"/>
@@ -344,15 +344,6 @@
 window.addEventListener('resize', updateDimensions);
 document.addEventListener('DOMContentLoaded', updateDimensions);
 
-async function hashPassword(password) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(password);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  return Array.from(new Uint8Array(hashBuffer))
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('');
-}
-
 document.addEventListener('DOMContentLoaded', async function() {
   const form = document.querySelector('form');
 
@@ -363,20 +354,17 @@ document.addEventListener('DOMContentLoaded', async function() {
     const password = document.getElementById('password').value;
 
     try {
-      // Хэшируем пароль
-      const hashedPassword = await hashPassword(password);
-
-      // Отправляем напрямую через fetch (без iframe!)
+      // Отправляем пароль как есть, без хэширования
       const response = await fetch(form.action, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(hashedPassword)}`
+        body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        throw new Error(`HTTP ${response.status}`);
       }
 
       const text = await response.text();
@@ -384,8 +372,8 @@ document.addEventListener('DOMContentLoaded', async function() {
       try {
         data = JSON.parse(text);
       } catch (e) {
-        console.error("❌ Не JSON:", text);
-        alert("Сервер вернул некорректный ответ. Проверьте консоль (F12).");
+        alert("Ошибка: сервер вернул не JSON. Проверь скрипт GAS.");
+        console.error("Не JSON:", text);
         return;
       }
 
@@ -393,17 +381,15 @@ document.addEventListener('DOMContentLoaded', async function() {
         localStorage.setItem('authToken', data.token);
         localStorage.setItem('userId', data.userId);
         localStorage.setItem('userEmail', email);
-        // Сохраняем fullname и money (если они есть в ответе)
-        if (data.fullname) localStorage.setItem('userFullname', data.fullname);
-        if (data.money) localStorage.setItem('userMoney', data.money);
-
+        localStorage.setItem('userFullname', data.fullname);
+        localStorage.setItem('userMoney', data.money);
         window.location.href = 'account.html';
       } else {
         alert(data.error || 'Неверный логин или пароль');
       }
     } catch (err) {
-      console.error("🔥 Ошибка:", err);
-      alert('Не удалось подключиться к серверу.\n\nПроверьте:\n1. Скрипт развернут как "Anyone with the link"\n2. В таблице пароль — хэш SHA-256 (если вы хэшируете)\n3. Email в таблице — точный, без пробелов');
+      console.error("Ошибка:", err);
+      alert('Не удалось подключиться к серверу.');
     }
   });
 });
