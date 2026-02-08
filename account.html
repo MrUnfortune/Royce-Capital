@@ -21,7 +21,7 @@
           .container {
             display: grid;
             grid-template-rows: 80px auto 1fr auto 50px;
-            grid-template-columns: 1fr 4fr 1fr;
+            grid-template-columns: 0fr 4fr 1fr;
             height: 100vh;
             grid-template-areas:
                 "header        header        header"
@@ -61,7 +61,6 @@
             background-color: #0c0c0c;
             padding: 20px;
             display: flex;
-            justify-content: center;
             align-items: center;
         }
         
@@ -78,14 +77,14 @@
         .banner {
             grid-area: banner;
             background-color: #0c0c0c;
-            padding: 20px;
-            text-align: center;
+            padding: 0px 0px 0px 0px;
+            margin-left: 0px;
         }
 
         .right-aside {
             grid-area: right-aside;
             background-color: #0c0c0c;
-            padding: 20px;
+            padding: 0px;
         }
 
         .low-content {
@@ -100,6 +99,155 @@
             padding: 20px;
             text-align: center;
         }
+        
+        .user-info-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%; /* Занимает всю ширину main */
+            padding: 0px;
+            margin-left: 70px;
+        }
+        .welcome-text {
+            font-size: 24px; /* Пример размера шрифта */
+            margin-bottom: 5px; /* Отступ снизу перед именем */
+            padding: 0px 0px 0px 0px;
+            margin-left: 0px;
+        }
+        .name-text {
+            font-size: 28px; /* Пример размера шрифта для имени */
+            font-weight: bold;
+            margin-bottom: 10px; /* Отступ снизу перед балансом */
+            color: #c6c6c6; /* Белый цвет для имени */
+        }
+        .balance-text {
+            font-size: 35px; /* Пример размера шрифта для баланса */
+            color: #FFD941; /* Зелёный цвет для баланса */
+            
+        }
+        
+        .Your-balance{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .top-up-btn {
+            background-color: #e0e0e0; /* светло-серый */
+            color: #0c0c0c;               /* чёрный текст */
+            border: none;
+            border-radius: 24px;       /* сильно закруглённые углы — как у iOS/Android */
+            padding: 10px 24px;        /* вертикальный отступ ~10px, горизонтальный ~24px */
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;                  /* отступ между текстом и стрелкой */
+            transition: background-color 0.2s;
+            margin-right: 0px;
+            margin-top: -618px;
+            margin-left: 45px;
+            z-index: 1000;
+        }
+
+        .top-up-btn:hover {
+            background-color: #c6c6c6;
+        }
+
+/* Стрелка — можно сделать чуть жирнее или поднять */
+        .arrow {
+            font-size: 18px;
+            line-height: 1;
+        }
+        
+        .action-btn {
+            background-color: #2a2a2a; /* тёмно-серый под чёрный фон */
+            color: #c6c6c6;            /* светло-серый текст */
+            border: none;
+            border-radius: 24px;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s, transform 0.2s;
+            text-decoration: none;
+            margin-top: -618px;
+            margin-left: 10px;
+            z-index: 1000;
+        }
+
+        .action-btn:hover {
+            background-color: #3a3a3a;
+            transform: scale(1.02);
+        }
+
+/* Стрелка */
+        .arrow-right {
+            font-size: 18px;
+            line-height: 1;
+        }
+        
+        .card1 {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-left: 4px;
+            margin-top: -830px;
+            z-index: 1000;
+        }
+        
+        .card2 {
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-left: -11px;
+            margin-top: -830px;
+            z-index: 1000;
+        }
+            
+        .card3 {
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-left: -11px;
+            margin-top: -745px;
+            width: -1px;
+            z-index: 1000;
+        }
+        
+        .period-tabs {
+            display: flex;
+            gap: 26px;
+            margin-bottom: 106px;
+        }
+            
+        .tab {
+            flex: -1;
+            font-size: 15px;
+            color: #c6c6c6;
+            padding: 5px 0;
+            cursor: default;
+            background-color: #282828;
+            border-radius: 10px;
+        
+            
+        }
+
+        
+        .zone{
+            min-width: 11px;
+            width: 450px;
+            margin-top: -170px;
+            margin-left: 355px;
+        }
+        
 
 
 
@@ -122,7 +270,7 @@
                 width: 100%;
                 max-width: 180px;
                 padding: 0px 0px 0px 0px;
-                margin-left: 100px;
+                margin-left: 30px;
             }
             
         .underline{
@@ -133,6 +281,187 @@
             margin-right: 25px;
             margin-left: 25px;
         }   
+        
+        .banner {
+            grid-area: banner;
+            background-color: #0c0c0c;
+            padding: 0px 0px 0px 0px;
+            margin-left: 0px;
+        }
+        .user-info-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%; /* Занимает всю ширину main */
+            padding: 20px;
+            margin-left: 5px;
+        }
+        .welcome-text {
+            font-size: 24px; /* Пример размера шрифта */
+            margin-bottom: 5px; /* Отступ снизу перед именем */
+            padding: 0px 0px 0px 0px;
+            margin-left: 0px;
+        }
+            
+        .Your-balance{
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+            
+        .name-text {
+            font-size: 28px; /* Пример размера шрифта для имени */
+            font-weight: bold;
+            margin-bottom: 10px; /* Отступ снизу перед балансом */
+            color: #c6c6c6; /* Белый цвет для имени */
+        }
+        .balance-text {
+            font-size: 60px; /* Пример размера шрифта для баланса */
+            color: #FFD941; /* Зелёный цвет для баланса */
+            
+        }
+        
+        .top-up-btn {
+            background-color: #e0e0e0; /* светло-серый */
+            color: #0c0c0c;               /* чёрный текст */
+            border: none;
+            border-radius: 24px;       /* сильно закруглённые углы — как у iOS/Android */
+            padding: 10px 24px;        /* вертикальный отступ ~10px, горизонтальный ~24px */
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;                  /* отступ между текстом и стрелкой */
+            transition: background-color 0.2s;
+            margin-right: 0px;
+            margin-top: -425px;
+            margin-left: 10px;
+            }
+
+        .top-up-btn:hover {
+            background-color: #c6c6c6;
+        }
+
+/* Стрелка — можно сделать чуть жирнее или поднять */
+        .arrow {
+            font-size: 18px;
+            line-height: 1;
+        }
+        
+        
+        .action-btn {
+            background-color: #2a2a2a; /* тёмно-серый под чёрный фон */
+            color: #c6c6c6;            /* светло-серый текст */
+            border: none;
+            border-radius: 24px;
+            padding: 10px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            margin-top: -425px;
+            margin-left: 10px;
+        }
+
+        .action-btn:hover {
+            background-color: #3a3a3a;
+            transform: scale(1.02);
+        }
+
+/* Стрелка */
+        .arrow-right {
+            font-size: 18px;
+            line-height: 1;
+        }
+        
+        .card1 {
+            background-color: #282828;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-left: -290px;
+            margin-top: -180px;
+        }
+        
+        .card2 {
+            background-color: #282828;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-left: 20px;
+            margin-top: -180px;
+        }
+            
+        .card3 {
+            background-color: #282828;
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-left: -300px;
+            margin-top: 220px;
+            width: 330px;
+        }
+
+        .card-header {
+            font-size: 16px;
+            font-weight: 600;
+            color: #c6c6c6;
+            border-bottom: 1px dashed #555;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+
+        .card-body {
+            height: 80px; /* можно изменить под контент */
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            display: flex;
+            color: #a6a6a6;
+            font-size: 14px;
+        }
+            
+        
+        .period-tabs {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 11px;
+        }
+            
+        .tab {
+            flex: 1;
+            text-align: center;
+            font-size: 14px;
+            color: #888;
+            padding: 5px 0;
+            border-bottom: 1px solid #444;
+            cursor: default;
+            background-color: #282828;
+            border-radius: ;
+        }
+
+        .tab:first-child {
+            border-left: 1px solid #444;
+        }
+
+        .tab:last-child {
+            border-right: 1px solid #444;
+        }
+            
+        .zone{
+            width: 0;  
+        }
         }
 
 
@@ -146,10 +475,38 @@
             <div class="underline"></div>
         </header>
         <aside class="left-aside"></aside>
-        <main class="main" style="display: flex; flex-direction: column; gap: 15px;">
-            <h3></h3>
+        <main class="main">
+            <button class="top-up-btn">Top up <span class="arrow">↓</span></button>
+            <button class="action-btn withdrawal-btn">
+                Withdrawal
+            <span class="arrow-right">→</span>
+            </button>
+            <div class="card1">
+            <div class="card-header">Start investing</div>
+            <div class="card-body"></div>
+            </div>
+
+  <!-- Блок 2: All-time profit -->
+            <div class="card2">
+                <div class="card-header">All-time profit</div>
+            <div class="card-body"></div>
+            </div>
+
+  <!-- Блок 3: Profit for the period -->
+            <div class="card3">
+                <div class="card-header">Profit for the period</div>
+            <div class="period-tabs">
+            <div class="tab">Week</div>
+            <div class="tab">Month</div>
+            <div class="tab">Year</div>
+            </div>
+            <div class="card-body"></div>
+        </div>
         </main>
-        <section class="banner"></section>
+        <section class="banner">
+            <div id="userInfoContainer" class="user-info-container"></div>
+            <img src="Zone.png" alt="zone" class="zone">
+        </section>
         <aside class="right-aside"></aside>
         <section class="low-content"></section>
         <footer class="footer"></footer>
@@ -157,46 +514,88 @@
 
     <script>
         function updateDimensions() {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            document.getElementById('width').textContent = width;
-            document.getElementById('height').textContent = height;
-        }
+const width = window.innerWidth;
+const height = window.innerHeight;
+document.getElementById('width').textContent = width;
+document.getElementById('height').textContent = height;
+}
+window.addEventListener('resize', updateDimensions);
+document.addEventListener('DOMContentLoaded', updateDimensions);
 
-        window.addEventListener('resize', updateDimensions); 
-        document.addEventListener('DOMContentLoaded', updateDimensions);
-        
-        const urlParams = new URLSearchParams(window.location.search);
-  const token = urlParams.get('token');
+const urlParams = new URLSearchParams(window.location.search);
+const token = urlParams.get('token');
+const userInfoContainer = document.getElementById('userInfoContainer'); // Получаем элемент контейнера
 
-  if (token) {
-    // Сохраняем токен и получаем данные через doGet
-    fetch(`https://script.google.com/macros/s/AKfycbxNujN4xbK_QvOeD2ofzkmlQxU7PW3fhLDLMyo_of4hvTsIQmVHetW-BTvrwI59G2dS/exec?token=${encodeURIComponent(token)}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.valid) {
-          localStorage.setItem('authToken', token);
-          localStorage.setItem('userId', data.userId);
-          localStorage.setItem('userFullname', data.fullname);
-          localStorage.setItem('userMoney', data.money);
-          // Удаляем token из URL для чистоты
-          history.replaceState(null, null, window.location.pathname);
-        } else {
-          alert('Сессия недействительна. Пожалуйста, войдите снова.');
-          window.location.href = 'enter.html';
-        }
-      })
-      .catch(err => {
-        console.error('Ошибка загрузки данных:', err);
-        alert('Не удалось загрузить данные. Обновите страницу.');
-      });
-  } else {
-    // Если нет токена — пользователь зашёл напрямую
-    if (!localStorage.getItem('authToken')) {
-      alert('Сессия истекла. Пожалуйста, войдите снова.');
-      window.location.href = 'enter.html';
+function displayUserInfo(fullname, money) {
+    userInfoContainer.innerHTML = `
+        <h3 class="welcome-text">Welcome back, ${fullname}!</h3>
+        <p class="Your-balance">Your Balance:</p>
+        <p class="balance-text"> $${money} </p>
+    `;
+}
+
+function displayError(message) {
+    userInfoContainer.innerHTML = `<p class="error-text">${message}</p>`;
+}
+
+function loadUserData() {
+    // Проверяем наличие токена в localStorage
+    const storedToken = localStorage.getItem('authToken');
+    if (!storedToken) {
+        displayError('Сессия истекла. Пожалуйста, войдите снова.');
+        setTimeout(() => {
+             window.location.href = 'enter.html';
+        }, 3000); // Перенаправление через 3 секунды
+        return;
     }
-  }
+
+    // Пытаемся получить данные из localStorage
+    const storedFullname = localStorage.getItem('userFullname');
+    const storedMoney = localStorage.getItem('userMoney');
+
+    if (storedFullname && storedMoney !== null) {
+        // Если данные есть в localStorage, сразу их отображаем
+        displayUserInfo(storedFullname, storedMoney);
+    } else {
+        // Если данных нет, возможно, это первый заход на страницу после входа
+        // Проверяем URL-токен и делаем запрос
+        if (token) {
+            fetch(`https://script.google.com/macros/s/AKfycbxNujN4xbK_QvOeD2ofzkmlQxU7PW3fhLDLMyo_of4hvTsIQmVHetW-BTvrwI59G2dS/exec?token=${encodeURIComponent(token)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.valid) {
+                        localStorage.setItem('authToken', token);
+                        localStorage.setItem('userId', data.userId);
+                        localStorage.setItem('userFullname', data.fullname);
+                        localStorage.setItem('userMoney', data.money);
+                        // После сохранения данных, отображаем их
+                        displayUserInfo(data.fullname, data.money);
+                        // Удаляем token из URL для чистоты
+                        history.replaceState(null, null, window.location.pathname);
+                    } else {
+                        displayError('Сессия недействительна. Пожалуйста, войдите снова.');
+                        localStorage.removeItem('authToken'); // Очищаем невалидный токен
+                        setTimeout(() => {
+                             window.location.href = 'enter.html';
+                        }, 3000); // Перенаправление через 3 секунды
+                    }
+                })
+                .catch(err => {
+                    console.error('Ошибка загрузки данных:', err);
+                    displayError('Не удалось загрузить данные. Обновите страницу.');
+                });
+        } else {
+            // Если нет ни URL-токена, ни localStorage - ошибка
+            displayError('Сессия отсутствует. Пожалуйста, войдите снова.');
+            setTimeout(() => {
+                 window.location.href = 'enter.html';
+            }, 3000); // Перенаправление через 3 секунды
+        }
+    }
+}
+
+// Вызываем функцию загрузки данных при загрузке скрипта
+loadUserData();
         
     </script>
 </body>
