@@ -277,7 +277,7 @@
             <img src ="Visual%20block,%20logo.png" alt="Logo" class="logo-img">
             <div class="form-container">
                 <h2>Welcome back</h2>
-                <form method="POST" action="https://script.google.com/macros/s/AKfycby31WtHhXivSUxpFDct7EBPN5vm4SusPgqsqGNrrL-IRsgyh-ruxMmMe6zbVmm71ANJ/exec">
+                <form method="POST" action="https://script.google.com/macros/s/AKfycbxNujN4xbK_QvOeD2ofzkmlQxU7PW3fhLDLMyo_of4hvTsIQmVHetW-BTvrwI59G2dS/exec">
                 <div class="input-group">
                     <svg class="email-password-icon" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="35" height="35" fill="url(#pattern0_3_63)"/>
@@ -346,7 +346,6 @@ document.addEventListener('DOMContentLoaded', updateDimensions);
 
 document.addEventListener('DOMContentLoaded', async function() {
   const form = document.querySelector('form');
-
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
@@ -354,28 +353,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     const password = document.getElementById('password').value;
 
     try {
-      // Отправляем пароль как есть, без хэширования
       const response = await fetch(form.action, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: `email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-
       const text = await response.text();
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch (e) {
-        alert("Ошибка: сервер вернул не JSON. Проверь скрипт GAS.");
-        console.error("Не JSON:", text);
-        return;
-      }
+      const data = JSON.parse(text);
 
       if (data.success) {
         localStorage.setItem('authToken', data.token);
@@ -388,8 +373,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         alert(data.error || 'Неверный логин или пароль');
       }
     } catch (err) {
-      console.error("Ошибка:", err);
-      alert('Не удалось подключиться к серверу.');
+      console.error(err);
+      alert('Ошибка: проверьте консоль (F12) и убедитесь, что скрипт развернут как "Anyone with the link"');
     }
   });
 });
