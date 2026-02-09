@@ -120,7 +120,7 @@
             color: #c6c6c6; /* Белый цвет для имени */
         }
         .balance-text {
-            font-size: 35px; /* Пример размера шрифта для баланса */
+            font-size: 80px; /* Пример размера шрифта для баланса */
             color: #FFD941; /* Зелёный цвет для баланса */
             
         }
@@ -144,7 +144,7 @@
             gap: 8px;                  /* отступ между текстом и стрелкой */
             transition: background-color 0.2s;
             margin-right: 0px;
-            margin-top: -618px;
+            margin-top: -570px;
             margin-left: 45px;
             z-index: 1000;
         }
@@ -173,7 +173,7 @@
             gap: 8px;
             transition: background-color 0.2s, transform 0.2s;
             text-decoration: none;
-            margin-top: -618px;
+            margin-top: -570px;
             margin-left: 10px;
             z-index: 1000;
         }
@@ -194,7 +194,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-left: 4px;
+            margin-left: 385px;
             margin-top: -830px;
             z-index: 1000;
         }
@@ -205,7 +205,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-left: -11px;
+            margin-left: 175px;
             margin-top: -830px;
             z-index: 1000;
         }
@@ -216,8 +216,8 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
-            margin-left: -11px;
-            margin-top: -745px;
+            margin-left: 175px;
+            margin-top: -770px;
             width: -1px;
             z-index: 1000;
         }
@@ -228,26 +228,61 @@
             margin-bottom: 106px;
         }
             
-        .tab {
-            flex: -1;
-            font-size: 15px;
-            color: #c6c6c6;
-            padding: 5px 0;
-            cursor: default;
+        .period-tabs {
+            display: inline-flex;
             background-color: #282828;
-            border-radius: 10px;
-        
-            
+            border-radius: 24px; /* Основной овал */
+            overflow: hidden; /* Чтобы внутренние элементы не выходили за границы */
+            padding: -1px; /* Тонкий отступ для "рамки" между табами */
         }
 
-        
+        .tab {
+            flex: 1;
+            min-width: 60px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #c6c6c6;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+/* Убираем границы между табами — делаем их "сливающимися" */
+        .tab:not(:last-child) {
+            margin-right: -25px;
+        }
+
+/* Активный таб — жёлтый фон + тонкая белая граница по краям (эффект овала внутри) */
+        .tab.active {
+            background-color: #c6c6c6;
+            color: #0c0c0c;
+            outline: 0px solid rgba(255, 217, 65, 0.5);
+        }
+
+/* При наведении — слегка светлее, но без полного выделения */
+        .tab:hover {
+            background-color: #3a3a3a;
+        }
+
         .zone{
             min-width: 11px;
-            width: 450px;
+            width: 1000px;
             margin-top: -170px;
-            margin-left: 355px;
+            margin-left: 730px;
         }
         
+        .underline2{
+            max-width: calc(100%-40px);
+            height: 1px;
+            background-color: #a6a6a6;
+            margin-top: -5px;
+            margin-right: -5px;
+            margin-left: 70px;
+        }
 
 
 
@@ -333,7 +368,7 @@
             gap: 8px;                  /* отступ между текстом и стрелкой */
             transition: background-color 0.2s;
             margin-right: 0px;
-            margin-top: -425px;
+            margin-top: -350px;
             margin-left: 10px;
             }
 
@@ -362,7 +397,7 @@
             gap: 8px;
             transition: background-color 0.2s;
             text-decoration: none;
-            margin-top: -425px;
+            margin-top: -350px;
             margin-left: 10px;
         }
 
@@ -386,7 +421,7 @@
             gap: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             margin-left: -290px;
-            margin-top: -180px;
+            margin-top: -100px;
         }
         
         .card2 {
@@ -398,7 +433,7 @@
             gap: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             margin-left: 20px;
-            margin-top: -180px;
+            margin-top: -100px;
         }
             
         .card3 {
@@ -410,7 +445,7 @@
             gap: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             margin-left: -300px;
-            margin-top: 220px;
+            margin-top: 300px;
             width: 330px;
         }
 
@@ -462,6 +497,11 @@
         .zone{
             width: 0;  
         }
+        
+        .underline2{
+            visibility: hidden;
+        }
+        
         }
 
 
@@ -496,9 +536,9 @@
             <div class="card3">
                 <div class="card-header">Profit for the period</div>
             <div class="period-tabs">
-            <div class="tab">Week</div>
-            <div class="tab">Month</div>
-            <div class="tab">Year</div>
+                <div class="tab active" data-period="day">Week</div>
+                <div class="tab" data-period="month">Month</div>
+                <div class="tab" data-period="year">Year</div>
             </div>
             <div class="card-body"></div>
         </div>
@@ -506,6 +546,7 @@
         <section class="banner">
             <div id="userInfoContainer" class="user-info-container"></div>
             <img src="Zone.png" alt="zone" class="zone">
+            <div class="underline2"></div>
         </section>
         <aside class="right-aside"></aside>
         <section class="low-content"></section>
@@ -597,6 +638,15 @@ function loadUserData() {
 // Вызываем функцию загрузки данных при загрузке скрипта
 loadUserData();
         
+        document.addEventListener('DOMContentLoaded', () => {
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+    });
     </script>
 </body>
 
