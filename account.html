@@ -46,7 +46,7 @@
             height: 1px;
             background-color: #a6a6a6;
             margin-top: 15px;
-            margin-right: 120px;
+            margin-right: 140px;
             margin-left: 75px;
         }
 
@@ -280,12 +280,12 @@
             height: 1px;
             background-color: #a6a6a6;
             margin-top: -5px;
-            margin-right: -5px;
+            margin-right: 0px;
             margin-left: 70px;
         }
         
         .CalPC{
-            margin-left: -1560px;
+            margin-left: -1552px;
             margin-top: -18px;
             width: 1000px;
         }
@@ -385,8 +385,8 @@
             gap: 8px;                  /* отступ между текстом и стрелкой */
             transition: background-color 0.2s;
             margin-right: 0px;
-            margin-top: -770px;
-            margin-left: 10px;
+            margin-top: -1125px;
+            margin-left: -10px;
             }
 
         .top-up-btn:hover {
@@ -415,7 +415,7 @@
             gap: 8px;
             transition: background-color 0.2s;
             text-decoration: none;
-            margin-top: -770px;
+            margin-top: -1125px;
             margin-left: 10px;
         }
 
@@ -438,8 +438,8 @@
             flex-direction: column;
             gap: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin-left: -290px;
-            margin-top: -550px;
+            margin-left: -275px;
+            margin-top: -905px;
         }
         
         .card2 {
@@ -450,8 +450,8 @@
             flex-direction: column;
             gap: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin-left: 20px;
-            margin-top: -550px;
+            margin-left: 30px;
+            margin-top: -905px;
         }
             
         .card3 {
@@ -462,8 +462,8 @@
             flex-direction: column;
             gap: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            margin-left: -299px;
-            margin-top: -160px;
+            margin-left: -300px;
+            margin-top: -520px;
             width: 330px;
         }
 
@@ -537,14 +537,14 @@
         }
           
         .CalPh{
-            margin-left: 230px;
-            margin-top: 520px;
+            margin-left: 215px;
+            margin-top: 100px;
         }
         
         .pnl-calendar {
-            margin-left: -359px;;
+            margin-left: -356px;;
             margin-right: auto;
-            margin-top: 210px;
+            margin-top: 80px;
             width: 368px;
             max-width: 400px;
             padding: 16px;
@@ -577,13 +577,6 @@
             outline: none;
         }
 
-        .pnl-calendar .divider {
-            height: 1px;
-            background-color: #555;
-            border-top: 1px dashed #777;
-            margin: 8px 0;
-        }
-
         .pnl-calendar .weekdays {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -606,7 +599,7 @@
         }
 
         .pnl-calendar .calendar-grid > div {
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 0.5 / 0.5;
             background-color: #1a1a1a;
             border-radius: 8px;
             display: flex;
@@ -637,6 +630,22 @@
             font-size: 10px;
             line-height: 1;
             }
+        
+        .dashboard{
+            margin-top: 920px;
+            margin-left: -370px;
+            margin-right: 90px;
+            width: 320px;
+        }
+        
+         .underline3{
+            max-width: calc(100%-40px);
+            height: 1px;
+            background-color: #a6a6a6;
+            margin-top: -100px;
+            margin-right: 180px;
+            margin-left: -20px;
+        }
         }
         
         @media (min-width: 679px) {
@@ -650,7 +659,7 @@
             padding: 20px;
             position: relative;
             margin-left: -993px; /* как у CalPC */
-            margin-top: -494px;
+            margin-top: -66px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
@@ -672,7 +681,7 @@
             background-color: #222222;
             color: #c6c6c6;
             border: none;
-            font-size: 16px;
+            font-size: 18px;
             padding: 4px 8px;
             border-radius: 6px;
             cursor: pointer;
@@ -681,13 +690,6 @@
 
         .month-select:focus {
             background-color: #333333;
-        }
-
-        .divider {
-            height: 1px;
-            background-color: #555;
-            border-top: 1px dashed #777;
-            margin: 8px 0;
         }
 
         .weekdays {
@@ -712,14 +714,14 @@
         }
 
         .calendar-grid > div {
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 0.8 / 0.4;
             background-color: #1a1a1a;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #c6c6c6;
-            font-size: 14px;
+            font-size: 6px;
             cursor: pointer;
             transition: background-color 0.2s;
         }
@@ -739,6 +741,21 @@
 
         .calendar-grid .negative {
             color: #FF4136;
+        }
+        
+        .dashboard{
+            margin-top: -15px;
+            margin-left: 162px;
+            width: 470px;
+        }
+        
+         .underline3{
+            max-width: calc(100%-40px);
+            height: 1px;
+            background-color: #a6a6a6;
+            margin-top: -40px;
+            margin-right: -20px;
+            margin-left: 40px;
         }
         }
 
@@ -820,13 +837,16 @@
     <!-- Будут добавляться div'ы через JS -->
             </div>
             </div>
+            <img src="dashboard.png" alt="dash" class="dashboard">
         </main>
         <section class="banner">
             <div id="userInfoContainer" class="user-info-container"></div>
             <img src="Zone.png" alt="zone" class="zone">
             <div class="underline2"></div>
         </section>
-        <section class="low-content"></section>
+        <section class="low-content">
+            <div class="underline3"></div>
+        </section>
     </div>
 
     <script>
